@@ -101,8 +101,12 @@ function prompt_steeef_setup {
   fi
 
   # Define prompts.
-  PROMPT="$show_return${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]'"$ "
+  PROMPT_LINE1="$show_return${_prompt_steeef_colors[3]}%n%f at ${_prompt_steeef_colors[2]}%m%f in ${_prompt_steeef_colors[5]}%~%f "'${vcs_info_msg_0_}'""
+  if [[ ${KUBE_PS1_ENABLED} != "off" ]]; then
+    PROMPT_LINE1="${PROMPT_LINE1} (${_prompt_steeef_colors[5]}"'$KUBE_PS1_CONTEXT'"%f/${_prompt_steeef_colors[2]}"'$KUBE_PS1_NAMESPACE'"%f)"
+  fi
+  PROMPT="${PROMPT_LINE1}
+"'$python_info[virtualenv]$ '
   RPROMPT=''
 }
 
